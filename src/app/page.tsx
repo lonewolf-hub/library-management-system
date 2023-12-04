@@ -1,10 +1,9 @@
 import Image from 'next/image'
-import SeatAllocation from './core/components/seat-allocation/SeatAllocation'
 
 export default function Home() {
   return (
-  <>
-  <SeatAllocation/>
-  </>
+    <>
+    <div>Please go to <a href="/signup">Signup</a> or <a href="/login">login</a> page</div>
+    </>
   )
 }

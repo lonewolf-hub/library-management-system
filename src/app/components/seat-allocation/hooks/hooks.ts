@@ -1,6 +1,6 @@
 // useSeatAllocation.ts
 import { useState, useEffect } from 'react';
-import { NUM_SEATS, ALLOCATION_DURATION } from '../../../constants/constant';
+import { NUM_SEATS, ALLOCATION_DURATION } from '../constants/constant';
 
 const useSeatAllocation = () => {
   const [seats, setSeats] = useState<Array<{ id: number; allocated: boolean }>>([]);
@@ -30,7 +30,7 @@ const useSeatAllocation = () => {
           seat.id === selectedSeat ? { ...seat, allocated: true } : seat
         )
       );
-
+  
       // Set a timeout to unallocate the seat after 1 hour
       setTimeout(() => {
         setSeats((prevSeats) =>
@@ -38,21 +38,20 @@ const useSeatAllocation = () => {
             seat.id === selectedSeat ? { ...seat, allocated: false } : seat
           )
         );
+  
         // After allocation, show the cancel modal
-        setShowCancelModal(true);
+        // setShowCancelModal(true);
         // Reset selected seat
-        setSelectedSeat(null);
       }, ALLOCATION_DURATION);
-
+  
       // Close the booking modal
       setShowBookModal(false);
     } else {
       // Reset selected seat and hide the modals if not confirmed
-      setSelectedSeat(null);
       setShowBookModal(false);
+      setShowCancelModal(false);
     }
   };
-
   const handleCancelClick = () => {
     // Close the booking modal and open the cancel modal
     setShowCancelModal(true);
