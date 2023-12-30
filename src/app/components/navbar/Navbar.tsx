@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideMobileMenu = false }) => {
 
   return (
     <div className='relative'>
-      <nav className='lg:flex justify-between items-center bg-secondary  py-2 px-12 border-b border-solid border-gray-600 gap-4 hidden md:block'>
+      <nav className='lg:flex justify-between items-center bg-primary-color  py-2 px-12 border-b border-solid border-gray-600 gap-4 hidden md:block'>
         <div className='flex-1 flex items-center justify-between gap-10'>
           <div className='pl-2 '>
             <Link href='/'>

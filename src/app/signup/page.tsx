@@ -56,7 +56,7 @@ const SignupPage: React.FC = () => {
   return (
     <>
     <Navbar/>
-    <div className="flex items-center justify-center min-h-screen  bg-maincolor">
+    <div className="flex items-center justify-center min-h-screen  bg-secondary-color ">
       <div className="bg-primary p-8 rounded shadow-md w-full max-w-md">
         <h1 className="text-3xl font-bold mb-4">{loading ? "Processing" : "Register"}</h1>
         <form className="flex flex-col">

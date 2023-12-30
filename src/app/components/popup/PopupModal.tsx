@@ -1,4 +1,3 @@
-// PopupModal.tsx
 import React from 'react';
 
 interface PopupModalProps {

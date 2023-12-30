@@ -5,38 +5,38 @@ import bcyptjs from "bcryptjs"
 
 connect()
 
-export async function POST(request: NextRequest){
+export async function POST(request: NextRequest) {
     try {
-        const reqBody = await request.json()
-        const {username,email,password}= reqBody
-        console.log(reqBody);
+        const reqBody = await request.json();
+        const { username, email, password, role } = reqBody;
 
-        //check if user already exists
-        const user = await User.findOne({email})
-        if (user) {
-            return NextResponse.json({error: "User already exists"},
-            {status:400})
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return NextResponse.json({ error: "User already exists" }, { status: 400 });
         }
-        //hash password
-        const salt = await bcyptjs.genSalt(10)
-        const hashedPassword = await bcyptjs.hash(password,salt)
 
-       const newUser = new User({
+        // Hash password
+        const salt = await bcyptjs.genSalt(10);
+        const hashedPassword = await bcyptjs.hash(password, salt);
+
+        // Create new user with role
+        const newUser = new User({
             username,
             email,
-            password:hashedPassword
-        })
+            password: hashedPassword,
+            role: role || 'user', // Set to 'user' if not specified
+        });
 
-        const savedUser = await newUser.save()
-        console.log(savedUser);
-        
-        return NextResponse.json({ 
-            message: "user created successfully",
+        // Save user to the database
+        const savedUser = await newUser.save();
+
+        return NextResponse.json({
+            message: "User created successfully",
             success: true,
-            savedUser
-        })
+            savedUser,
+        });
     } catch (error: any) {
-        return NextResponse.json({error: error.message},
-        {status:500})
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

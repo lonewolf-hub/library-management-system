@@ -17,8 +17,8 @@ const SeatAllocation: React.FC = () => {
 
     return (
         <>
-            <div className='flex flex-col bg-maincolor '>
-            <div className='flex text-3xl text-white items-center justify-center py-5'>
+            <div className='flex flex-col bg-secondary-color  '>
+            <div className='flex text-3xl text-black items-center justify-center py-5'>
                     Allocate Your Seat Using Our E-Seat Allocation
                 </div>  
             <div className="flex flex-wrap justify-center">

@@ -1,56 +1,46 @@
 import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel"
 import { NextRequest , NextResponse } from "next/server";
-import bcyptjs from "bcryptjs"
+import bcryptjs from "bcryptjs"
 import jwt from 'jsonwebtoken'
 connect()
 
-export async function POST(request:NextRequest) {
+export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const {email, password} = reqBody;
-        console.log(reqBody);
+        const { email, password } = reqBody;
 
-        //check if user exists
-        const user = await User.findOne({email})
-        if(!user){
-            return NextResponse.json({ error: "user does not exist"
-            }, {status:400})
-        }
-        console.log("user exists");
-        
-
-        //check if password is correct
-        const validPassword = await bcyptjs.compare
-        (password, user.password)
-        if(!validPassword){
-            return NextResponse.json({error: "Invalid password"},
-            {status:400})
+        // Check if user exists
+        const user = await User.findOne({ email })
+        if (!user) {
+            return NextResponse.json({ error: "User does not exist" }, { status: 400 });
         }
 
-        //Create token Data
+        // Check if password is correct
+        const validPassword = await bcryptjs.compare(password, user.password)
+        if (!validPassword) {
+            return NextResponse.json({ error: "Invalid password" }, { status: 400 });
+        }
+
+        // Create token data with user role
         const tokenData = {
             id: user._id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            role: user.role || 'user', // Assume default role is 'user'
         }
 
-        //create token 
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, 
-            {expiresIn: "7d"})
-        
+        // Create token 
+        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "7d" });
+
         const response = NextResponse.json({
             message: "Login Successful",
-            success:true,
-        })
+            success: true,
+        });
 
-        response.cookies.set("token", token,{
-            httpOnly:true,
-        })
+        response.cookies.set("token", token, { httpOnly: true });
         return response;
-    } catch (error:any) {
-        return NextResponse.json({error:error.message},
-            {status:500})
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
-    
 }

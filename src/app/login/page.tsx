@@ -44,9 +44,9 @@ const LoginPage = () => {
   return (
     <>
     <Navbar/>
-    <div className="flex items-center justify-center min-h-screen bg-maincolor">
-      <div className="bg-primary p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-4">{loading ? "Processing" : "Login"}</h1>
+    <div className="flex items-center justify-center min-h-screen bg-secondary-color ">
+      <div className="bg-primary p-8 rounded shadow-md w-full max-w-md ">
+        <h1 className="text-3xl font-bold mb-4 ">{loading ? "Processing" : "User Login"}</h1>
         <form className="flex flex-col">
           <label htmlFor="email" className="text-sm font-medium text-gray-600 mb-1">
             Email
@@ -87,6 +87,11 @@ const LoginPage = () => {
           <div className="mt-4 text-sm text-gray-600">
             <Link href="/signup" className="text-maincolor hover:underline">
               Don't have an account? Sign up here
+            </Link>
+          </div>
+          <div className=" text-sm text-gray-600">
+            <Link href="/admin-login" className="text-maincolor hover:underline">
+              if you are an admin login here..
             </Link>
           </div>
         </form>
