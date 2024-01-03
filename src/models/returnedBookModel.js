@@ -15,7 +15,6 @@ const returnedBookSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    // Add other fields as needed
 });
 
 const ReturnedBook = mongoose.models.ReturnedBook || mongoose.model('ReturnedBook', returnedBookSchema);

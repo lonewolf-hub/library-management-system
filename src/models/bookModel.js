@@ -27,10 +27,6 @@ const bookSchema = new mongoose.Schema({
         ref: 'Publisher',
         required: [true, 'Please provide a publisher'],
     },
-    publicationDate: {
-        type: Date,
-        required: [true, 'Please provide a publication date'],
-    },
     genre: {
         type: String,
         required: [true, 'Please provide a genre'],
